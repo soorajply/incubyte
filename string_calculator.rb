@@ -24,7 +24,14 @@ class StringCalculator
       numbers = parts[1]
     end
 
-    all_numbers = numbers.split(delimiter)
-    all_numbers.map(&:to_i).sum
+    all_numbers = numbers.split(delimiter).map(&:to_i)
+
+
+    negative_numbers = all_numbers.select { |n| n < 0 }
+    unless negative_numbers.empty?
+      raise "negative numbers not allowed #{negative_numbers.join(',')}"
+    end
+
+    all_numbers.sum
   end
 end
